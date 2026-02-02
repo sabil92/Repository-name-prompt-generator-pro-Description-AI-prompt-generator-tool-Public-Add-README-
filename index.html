@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Studio Prompt Director</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial; padding: 20px; background:#111; color:white;}
-select, textarea, button {width:100%; margin:5px 0; padding:10px;}
-textarea {height:300px;}
-button {background:#00ff88; border:none; font-weight:bold;}
-h2 {margin-top:20px;}
-</style>
-</head>
-
-<body>
-
-<h1>🎬 Studio Director Mode</h1>
-
-<h2>Lingkungan</h2>
-<select id="location"></select>
+<!<select id="location"></select>
 <select id="weather"></select>
-<select id="time"></select>
-<select id="mood"></select>
-
-<h2>Kamera</h2>
-<select id="shot"></select>
-<select id="angle"></select>
-<select id="movement"></select>
-<select id="focus"></select>
-
-<h2>Kualitas</h2>
+<select id="camera"></select>
 <select id="quality"></select>
 <select id="ratio"></select>
 
-<h2>Generate</h2>
-<button onclick="generate()">Generate Master Prompt</button>
-
 <textarea id="result"></textarea>
 
+<button onclick="generate()">Generate</button>
+
 <script src="app.js"></script>
-</body>
-</html>
