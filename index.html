@@ -1,34 +1,85 @@
-<const DB = {
 
-location: [
-"pedesaan",
-"trotoar kota",
-"rumah gubuk"
-],
+<!DOCTYPE html>
+<html>
+<head>
+<title>MASTER Prompt Generator Pro</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-weather: [
-"cerah",
-"sore hari",
-"malam hari"
-]
+<body>
 
-};
+<div class="box">
 
-function fill(){
-for(let key in DB){
-const el = document.getElementById(key);
-DB[key].forEach(item=>{
-const opt = document.createElement("option");
-opt.text = item;
-el.add(opt);
-});
-}
-}
+<h1>🎬 MASTER Prompt Generator</h1>
 
-fill();
+<label>Subject</label>
+<select id="subject">
+<option>Cyberpunk city</option>
+<option>Mystical forest</option>
+<option>Space station</option>
+<option>Desert traveler</option>
+</select>
 
-function generate(){
-result.value =
-"Lokasi: " + location.value +
-"\nCuaca: " + weather.value;
-}
+<label>Style</label>
+<select id="style">
+<option>Cinematic ultra realistic</option>
+<option>Anime high detail</option>
+<option>Photorealistic 8K</option>
+<option>Dark fantasy</option>
+</select>
+
+<label>Camera</label>
+<select id="camera">
+<option>Wide drone shot</option>
+<option>Close cinematic lens</option>
+<option>Low angle dramatic</option>
+<option>Tracking camera</option>
+</select>
+
+<label>Mood</label>
+<select id="mood">
+<option>Epic emotional</option>
+<option>Dark mysterious</option>
+<option>Bright hopeful</option>
+<option>Intense dramatic</option>
+</select>
+
+<button onclick="generatePrompt()">Generate Prompt</button>
+<button onclick="randomPrompt()">Random</button>
+
+<textarea id="prompt"></textarea>
+
+<hr>
+
+<label>Characters</label>
+<select id="characters">
+<option value="1">1 Person</option>
+<option value="2">2 People</option>
+<option value="3">3 People</option>
+</select>
+
+<label>Genre</label>
+<select id="genre">
+<option>Drama</option>
+<option>Comedy</option>
+<option>Horror</option>
+<option>Action</option>
+</select>
+
+<button onclick="generateDialog()">Generate Dialog</button>
+
+<textarea id="dialog"></textarea>
+
+<hr>
+
+<button onclick="generateScene()">Generate Story Scene</button>
+
+<textarea id="scene"></textarea>
+
+<button onclick="copyAll()">Copy All</button>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
