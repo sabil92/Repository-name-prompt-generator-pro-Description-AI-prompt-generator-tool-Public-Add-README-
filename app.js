@@ -1,101 +1,96 @@
-function generatePrompt() {
-const subject = document.getElementById("subject").value;
-const style = document.getElementById("style").value;
-const camera = document.getElementById("camera").value;
-const mood = document.getElementById("mood").value;
-
-const text = subject + ", " + style + ", " + camera + ", " + mood + ", ultra detailed";
-
-document.getElementById("prompt").value = text;
+// Generate pilihan karakter
+function generateKarakterOptions(){
+  const container = document.getElementById("karakterOptions");
+  container.innerHTML = "";
+  const count = document.getElementById("charCount").value;
+  for(let i=1;i<=count;i++){
+    container.innerHTML += `
+    <h3>DETAIL KARAKTER ${i}</h3>
+    <p>Identitas:</p>
+    <p>Penampilan: sesuai gambar referensi</p>
+    <label>Pakaian</label>
+    <select id="pakaian${i}">
+      <option>Casual</option>
+      <option>Formal</option>
+      <option>Armor</option>
+      <option>Jubah</option>
+      <option>Pakaian tradisional</option>
+      <option>Pakaian futuristik</option>
+    </select>
+    <label>Ekspresi</label>
+    <select id="ekspresi${i}">
+      <option>Bahagia</option>
+      <option>Sedih</option>
+      <option>Marah</option>
+      <option>Takut</option>
+      <option>Kaget</option>
+      <option>Serius</option>
+      <option>Santai</option>
+    </select>
+    <label>Gerakan</label>
+    <select id="gerakan${i}">
+      <option>Berdiri</option>
+      <option>Duduk</option>
+      <option>Berjalan</option>
+      <option>Melompat</option>
+      <option>Berlari</option>
+      <option>Menunduk</option>
+      <option>Memegang objek</option>
+    </select>
+    <hr>
+    `;
+  }
 }
 
-function randomPrompt() {
-["subject","style","camera","mood"].forEach(id=>{
-const el = document.getElementById(id);
-el.selectedIndex = Math.floor(Math.random()*el.options.length);
-});
-generatePrompt();
-}
+// Update saat jumlah karakter berubah
+document.getElementById("charCount").addEventListener("change", generateKarakterOptions);
+generateKarakterOptions();
 
-function generateDialog() {
-const count = document.getElementById("characters").value;
-const genre = document.getElementById("genre").value;
+// Generate prompt master
+function generateMasterPro(){
+  const count = document.getElementById("charCount").value;
+  let karakterText = "";
+  for(let i=1;i<=count;i++){
+    const pakaian = document.getElementById("pakaian"+i).value;
+    const ekspresi = document.getElementById("ekspresi"+i).value;
+    const gerakan = document.getElementById("gerakan"+i).value;
+    karakterText += `
+DETAIL KARAKTER ${i} :
+Identitas:
+Penampilan: sesuai gambar referensi
+Pakaian: ${pakaian}
+Ekspresi: ${ekspresi}
+Gerakan: ${gerakan}
+`;
+  }
 
-const scripts = {
-Drama:{1:"Aku tak bisa berhenti sekarang…",
-2:"A: Kamu percaya aku?\nB: Selalu.",
-3:"A: Kita keluarga.\nB: Bertahan.\nC: Sampai akhir."},
-Comedy:{1:"Kenapa hidupku kayak sinetron gagal?",
-2:"A: Rencanamu?\nB: Improvisasi.",
-3:"A: Ide buruk.\nB: Setuju.\nC: Gas."},
-Horror:{1:"Ada sesuatu di belakangku…",
-2:"A: Kamu dengar itu?\nB: Jangan lihat…",
-3:"A: Kita tidak sendiri.\nB: Diam.\nC: Dia datang."},
-Action:{1:"Target terkunci.",
-2:"A: Serang kiri!\nB: Copy!",
-3:"A: Formasi!\nB: Dorong!\nC: Maju!"}
-};
-
-document.getElementById("dialog").value = scripts[genre][count];
-}
-
-function generateScene(){
-const scenes=[
-"Kota neon hujan malam. Kurir berdiri di atap. \"Ini pengiriman terakhirku.\"",
-"Hutan berkabut. Tim memasuki reruntuhan. \"Tempat ini hidup.\"",
-"Stasiun angkasa sunyi. Astronaut masuk perlahan. \"Ada seseorang di sini.\"",
-"Gurun saat fajar. Pengembara berjalan. \"Perjalanan baru dimulai.\""
-];
-document.getElementById("scene").value=scenes[Math.floor(Math.random()*scenes.length)];
-}
-
-function copyAll(){
-const text =
-document.getElementById("prompt").value+"\n\n"+
-document.getElementById("dialog").value+"\n\n"+
-document.getElementById("scene").value;
-
-navigator.clipboard.writeText(text);
-alert("Copied all!");
-}
-
-function buildMaster(){
-
-const desc = document.getElementById("sceneDesc").value;
-const tone = document.getElementById("tone").value;
-const location = document.getElementById("location").value;
-const time = document.getElementById("time").value;
-const weather = document.getElementById("weather").value;
-const shot = document.getElementById("shot").value;
-
-const master = `
+  const prompt = `
 PRIORITAS REFERENSI GAMBAR:
 Karakter harus sangat mirip dengan gambar referensi. Pertahankan struktur wajah, proporsi tubuh, pose, dan identitas visual.
 
 DESKRIPSI ADEGAN:
-${desc}
 
-Dialog (bahasa indonesia, nada ${tone})
+Dialog (${document.getElementById("dialogNada").value}):
+${document.getElementById("dialogText").value}
 
-DETAIL KARAKTER 1:
-Penampilan sesuai gambar referensi
-Ekspresi tenang dan datar
-
-DETAIL KARAKTER 2:
-Penampilan sesuai gambar referensi
-Ekspresi tenang dan datar
-
-DETAIL KARAKTER 3:
-Penampilan sesuai gambar referensi
-Ekspresi tenang dan datar
+${karakterText}
 
 LINGKUNGAN:
-Lokasi: ${location}
-Waktu: ${time}
-Cuaca: ${weather}
+Lokasi: ${document.getElementById("lokasi").value}
+Latar belakang: ${document.getElementById("latar").value}
+Waktu: ${document.getElementById("waktu").value}
+Cuaca: ${document.getElementById("cuaca").value}
+Suasana: ${document.getElementById("suasana").value}
 
 KAMERA SINEMATIK:
-Jenis shot: ${shot}
+Jenis shot: ${document.getElementById("shot").value}
+Sudut kamera: ${document.getElementById("sudut").value}
+Gerakan kamera: ${document.getElementById("gerakCam").value}
+Kedalaman fokus: ${document.getElementById("focus").value}
+
+PENCACAHAYAAN & GAYA VISUAL:
+Tone warna: ${document.getElementById("tone").value}
+Gaya visual: ${document.getElementById("style").value}
 
 KUALITAS OUTPUT:
 8K ultra HD
@@ -104,5 +99,33 @@ ultra detail
 rasio vertikal 9:16
 `;
 
-document.getElementById("master").value = master;
+  document.getElementById("output").value = prompt;
+}
+
+// Copy semua
+function copyAll(){
+  const text = document.getElementById("output").value;
+  navigator.clipboard.writeText(text);
+  alert("Copied!");
+}
+
+// Random semua
+function randomMasterPro(){
+  // Karakter
+  const count = document.getElementById("charCount");
+  count.selectedIndex = Math.floor(Math.random()*count.options.length);
+  generateKarakterOptions();
+  const charCount = count.value;
+  for(let i=1;i<=charCount;i++){
+    ["pakaian","ekspresi","gerakan"].forEach(type=>{
+      const el = document.getElementById(type+i);
+      el.selectedIndex = Math.floor(Math.random()*el.options.length);
+    });
+  }
+  // Lingkungan & Kamera & Visual
+  ["lokasi","latar","waktu","cuaca","suasana","shot","sudut","gerakCam","focus","tone","style","dialogNada"].forEach(id=>{
+    const el = document.getElementById(id);
+    el.selectedIndex = Math.floor(Math.random()*el.options.length);
+  });
+  generateMasterPro();
 }
