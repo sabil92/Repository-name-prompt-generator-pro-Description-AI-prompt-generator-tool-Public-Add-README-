@@ -1,4 +1,48 @@
+<hr>
 
+<h2>🎥 Master Prompt Builder</h2>
+
+<label>Deskripsi Adegan</label>
+<input id="sceneDesc" placeholder="contoh: kejaran di kota malam">
+
+<label>Dialog Nada</label>
+<select id="tone">
+<option>tegang</option>
+<option>dramatis</option>
+<option>tenang</option>
+<option>emosional</option>
+</select>
+
+<label>Lokasi</label>
+<input id="location" placeholder="kota futuristik">
+
+<label>Waktu</label>
+<select id="time">
+<option>malam</option>
+<option>senja</option>
+<option>siang</option>
+<option>subuh</option>
+</select>
+
+<label>Cuaca</label>
+<select id="weather">
+<option>hujan</option>
+<option>berkabut</option>
+<option>cerah</option>
+<option>badai</option>
+</select>
+
+<label>Jenis Shot</label>
+<select id="shot">
+<option>close up cinematic</option>
+<option>wide drone shot</option>
+<option>tracking shot</option>
+<option>low angle dramatic</option>
+</select>
+
+<button onclick="buildMaster()">Generate Master Prompt</button>
+
+<textarea id="master"></textarea>
 <!DOCTYPE html>
 <html>
 <head>
