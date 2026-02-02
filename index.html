@@ -1,52 +1,7 @@
-<hr>
-
-<h2>🎥 Master Prompt Builder</h2>
-
-<label>Deskripsi Adegan</label>
-<input id="sceneDesc" placeholder="contoh: kejaran di kota malam">
-
-<label>Dialog Nada</label>
-<select id="tone">
-<option>tegang</option>
-<option>dramatis</option>
-<option>tenang</option>
-<option>emosional</option>
-</select>
-
-<label>Lokasi</label>
-<input id="location" placeholder="kota futuristik">
-
-<label>Waktu</label>
-<select id="time">
-<option>malam</option>
-<option>senja</option>
-<option>siang</option>
-<option>subuh</option>
-</select>
-
-<label>Cuaca</label>
-<select id="weather">
-<option>hujan</option>
-<option>berkabut</option>
-<option>cerah</option>
-<option>badai</option>
-</select>
-
-<label>Jenis Shot</label>
-<select id="shot">
-<option>close up cinematic</option>
-<option>wide drone shot</option>
-<option>tracking shot</option>
-<option>low angle dramatic</option>
-</select>
-
-<button onclick="buildMaster()">Generate Master Prompt</button>
-
-<textarea id="master"></textarea>
 <!DOCTYPE html>
 <html>
 <head>
-<title>MASTER Prompt Generator Pro</title>
+<title>MASTER PROMPT PRO ULTRA</title>
 <link rel="stylesheet" href="style.css">
 </head>
 
@@ -54,72 +9,145 @@
 
 <div class="box">
 
-<h1>🎬 MASTER Prompt Generator</h1>
+<h1>🎬 MASTER PROMPT PRO ULTRA</h1>
 
-<label>Subject</label>
-<select id="subject">
-<option>Cyberpunk city</option>
-<option>Mystical forest</option>
-<option>Space station</option>
-<option>Desert traveler</option>
+<label>Jumlah Karakter</label>
+<select id="charCount">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
 </select>
 
-<label>Style</label>
+<div id="karakterOptions"></div>
+
+<hr>
+
+<h3>Lingkungan / Environment</h3>
+<select id="lokasi">
+<option>Kota futuristik</option>
+<option>Hutan misterius</option>
+<option>Ruang angkasa</option>
+<option>Gurun luas</option>
+<option>Istana</option>
+<option>Desa</option>
+<option>Gedung tua</option>
+</select>
+
+<select id="latar">
+<option>Gedung tinggi</option>
+<option>Reruntuhan kuno</option>
+<option>Stasiun</option>
+<option>Dataran luas</option>
+<option>Pegunungan</option>
+<option>Sungai</option>
+<option>Langit malam</option>
+</select>
+
+<select id="waktu">
+<option>Pagi</option>
+<option>Siang</option>
+<option>Senja</option>
+<option>Malam</option>
+<option>Subuh</option>
+<option>Tengah malam</option>
+</select>
+
+<select id="cuaca">
+<option>Cerah</option>
+<option>Hujan</option>
+<option>Berkabut</option>
+<option>Storm</option>
+<option>Salju</option>
+<option>Angin kencang</option>
+</select>
+
+<select id="suasana">
+<option>Tenang</option>
+<option>Epik</option>
+<option>Misterius</option>
+<option>Menegangkan</option>
+<option>Ceria</option>
+<option>Romantis</option>
+<option>Suram</option>
+</select>
+
+<hr>
+
+<h3>Kamera Sinematik</h3>
+<select id="shot">
+<option>Close-up cinematic</option>
+<option>Wide drone shot</option>
+<option>Low angle</option>
+<option>Tracking</option>
+<option>Overhead</option>
+<option>Point of view</option>
+</select>
+
+<select id="sudut">
+<option>Eye level</option>
+<option>High angle</option>
+<option>Low angle</option>
+<option>Bird view</option>
+<option>Worm eye</option>
+<option>Tilted</option>
+</select>
+
+<select id="gerakCam">
+<option>Static</option>
+<option>Pan</option>
+<option>Tracking</option>
+<option>Dolly</option>
+<option>Zoom</option>
+<option>Crane</option>
+</select>
+
+<select id="focus">
+<option>Shallow depth</option>
+<option>Deep focus</option>
+<option>Selective focus</option>
+<option>Tilt shift</option>
+</select>
+
+<hr>
+
+<h3>Pencahayaan & Gaya Visual</h3>
+<select id="tone">
+<option>Warm</option>
+<option>Cold</option>
+<option>Neutral</option>
+<option>Dramatic</option>
+<option>Neon</option>
+<option>Pastel</option>
+</select>
+
 <select id="style">
 <option>Cinematic ultra realistic</option>
 <option>Anime high detail</option>
-<option>Photorealistic 8K</option>
 <option>Dark fantasy</option>
+<option>Photorealistic 8K</option>
+<option>Illustration</option>
+<option>Matte painting</option>
+<option>Concept art</option>
 </select>
-
-<label>Camera</label>
-<select id="camera">
-<option>Wide drone shot</option>
-<option>Close cinematic lens</option>
-<option>Low angle dramatic</option>
-<option>Tracking camera</option>
-</select>
-
-<label>Mood</label>
-<select id="mood">
-<option>Epic emotional</option>
-<option>Dark mysterious</option>
-<option>Bright hopeful</option>
-<option>Intense dramatic</option>
-</select>
-
-<button onclick="generatePrompt()">Generate Prompt</button>
-<button onclick="randomPrompt()">Random</button>
-
-<textarea id="prompt"></textarea>
 
 <hr>
 
-<label>Characters</label>
-<select id="characters">
-<option value="1">1 Person</option>
-<option value="2">2 People</option>
-<option value="3">3 People</option>
+<label>Dialog (Bahasa Indonesia)</label>
+<select id="dialogNada">
+<option>Tegang</option>
+<option>Emosional</option>
+<option>Lucu</option>
+<option>Santai</option>
+<option>Serius</option>
+<option>Dramatis</option>
 </select>
-
-<label>Genre</label>
-<select id="genre">
-<option>Drama</option>
-<option>Comedy</option>
-<option>Horror</option>
-<option>Action</option>
-</select>
-
-<button onclick="generateDialog()">Generate Dialog</button>
-
-<textarea id="dialog"></textarea>
+<textarea id="dialogText" placeholder="Tulis dialog di sini"></textarea>
 
 <hr>
 
-<button onclick="generateScene()">Generate Story Scene</button>
-
-<textarea id="scene"></textarea>
-
+<button onclick="generateMasterPro()">Generate Master Prompt</button>
+<button onclick="randomMasterPro()">Random All</button>
+<textarea id="output"></textarea>
 <button onclick="copyAll()">Copy All</button>
 
 </div>
